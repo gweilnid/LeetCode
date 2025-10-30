@@ -7,24 +7,23 @@ class Solution:
     def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
         dummy = ListNode()
         cur = dummy
-        result = []
-        current_l1 = l1
-        current_l2 = l2
+        l1_ptr = l1
+        l2_ptr = l2
         add_on = False
         idx = 0
-        while current_l1 is not None or current_l2 is not None:
-            x = current_l1.val if current_l1 else 0
-            y = current_l2.val if current_l2 else 0
-            result.append(x+y)
-            current_l1 = current_l1.next if current_l1 else None
-            current_l2 = current_l2.next if current_l2 else None
+        while l1_ptr is not None or l2_ptr is not None:
+            x = l1_ptr.val if l1_ptr else 0
+            y = l2_ptr.val if l2_ptr else 0
+            val = x + y
+            l1_ptr = l1_ptr.next if l1_ptr else None
+            l2_ptr = l2_ptr.next if l2_ptr else None
             if add_on:
-                result[idx] += 1
+                val += 1
                 add_on = False
-            if result[idx] > 9:
+            if val > 9:
                 add_on = True
-                result[idx] -= 10
-            cur.next = ListNode(result[idx])
+                val -= 10
+            cur.next = ListNode(val)
             cur = cur.next
             idx += 1
         if add_on:
